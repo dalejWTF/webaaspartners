@@ -2,6 +2,8 @@ import Social from "@/components/Social";
 import {FiDownload} from "react-icons/fi";
 import { Button } from '../components/ui/button'
 import Photo from "@/components/Photo";
+import CarouselDemo from "@/components/Carousel";
+
 
 const Home =() => {
   return (
@@ -30,6 +32,10 @@ const Home =() => {
         <div className="order-1 xl:order-none mb-8 xl:mb-0">
           <Photo/>
         </div>
+      </div>
+      {/* Carousel */}
+      <div >
+        <CarouselDemo/>
       </div>
     </div>
   </section>
