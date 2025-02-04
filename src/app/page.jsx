@@ -11,7 +11,7 @@ const Home =() => {
         <div className="text-center xl:text-left order-2 xl:order-none">
           <span className="text-xl">Architecture & Design Studio</span>
           <h1 className="h1 mb-6">
-            We're<br /><span className="text-accent">A+AS Partners</span>
+            We're<br />
           </h1>
           <p className="max-w-[500px] mb-9">
           A team of architects and designers who plan and build amazing structures.
