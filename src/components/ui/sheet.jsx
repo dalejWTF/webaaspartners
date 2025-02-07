@@ -51,6 +51,8 @@ const SheetContent = React.forwardRef(({ side = "right", className, children, ..
         <IoMdClose className="text-3xl text-accent" />
         <span className="sr-only">Close</span>
       </SheetPrimitive.Close>
+      {/* Título accesible para lectores de pantalla */}
+      <SheetPrimitive.Title className="sr-only">Menú Móvil</SheetPrimitive.Title>
       {children}
     </SheetPrimitive.Content>
   </SheetPortal>
