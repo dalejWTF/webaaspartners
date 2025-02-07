@@ -1,15 +1,13 @@
 import Social from "@/components/Social";
-import {FiDownload} from "react-icons/fi";
-import { Button } from '../components/ui/button'
 import Photo from "@/components/Photo";
-import CarouselDemo from "@/components/Carousel";
+import LandingCarousel from "@/components/LandingCarousel";
 
 
 const Home =() => {
   return (
   <section className="h-full">
     <div className="container mx-auto h-full">
-      <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-24">
+      <div className="flex flex-col xl:flex-row items-center justify-between xl:pt-8 xl:pb-8">
         <div className="text-center xl:text-left order-2 xl:order-none">
           <span className="text-xl">Architecture & Design Studio</span>
           <h1 className="h1 mb-6">
@@ -34,8 +32,8 @@ const Home =() => {
         </div>
       </div>
       {/* Carousel */}
-      <div >
-        <CarouselDemo/>
+      <div className="flex flex-col xl:flex-row items-center xl:pt-8 xl:pb-24 pb-8">
+        <LandingCarousel/>
       </div>
     </div>
   </section>

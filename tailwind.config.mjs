@@ -18,7 +18,7 @@ export default {
 		xl: "1200px",
 	},
 	fontFamily:{
-		primary:"var(--font-jetbrainsMono)",
+		primary:"var(--font-interFont)",
 	},
   	extend: {
   		colors: {
