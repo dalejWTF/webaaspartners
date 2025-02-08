@@ -1,37 +1,41 @@
 "use client";
 
 import Link from 'next/link';
-import React from 'react'
+import React from 'react';
 import { usePathname } from 'next/navigation';
+import { useTranslations } from "next-intl"; // Importa el hook
 
-const links = [
-    {
-        name: "home",
-        path: "/"
-    },
-    {
-        name: "services",
-        path: "/services"
-    }
-]
-
-const Nav =()=>{
+const Nav = ({ locale }) => {
     const pathname = usePathname();
-    return(
-        <nav className='flex gap-8'>
-            {links.map((link, index)=>{
-                return(
-                    <Link href={link.path} key={index}
-                    className={`${
-                        link.path === pathname && "text-primary border-b-2 border-accent"} 
-                        capitalize font-medium hover:text-primary transition-all`}
+    const t = useTranslations('Header'); // Obtén las traducciones para esta página
+
+    const links = [
+        {
+            name: "Home",
+            path: `/${locale}`
+        },
+        {
+            name: "Services",
+            path: `/${locale}/services`
+        }
+    ];
+
+    return (
+        <nav className="flex gap-8">
+            {links.map((link, index) => {
+                return (
+                    <Link
+                        href={link.path}
+                        key={index}
+                        className={`${link.path === pathname && "text-primary border-b-2 border-accent"
+                            } capitalize font-medium hover:text-primary transition-all`}
                     >
-                        {link.name}
+                        {t(link.name)}
                     </Link>
                 );
             })}
         </nav>
     );
-}
+};
 
-export default Nav
+export default Nav;

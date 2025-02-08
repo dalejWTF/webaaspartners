@@ -1,0 +1,30 @@
+{
+    "Home": {
+        "span": "Architecture & Design Studio",
+        "h1": "We're",
+        "p": "We are a team of architects and designers who plan and build amazing structures."
+    },
+    "Contact": {
+        "formTitle": "Let's work together",
+        "formDescription": "Fill out the form below and we'll get back to you as soon as possible.",
+        "firstNamePlaceholder": "First name",
+        "lastNamePlaceholder": "Last name",
+        "emailPlaceholder": "Email address",
+        "phonePlaceholder": "Phone number",
+        "selectServicePlaceholder": "Select a service",
+        "selectService": "Select a service",
+        "serviceInteriorDesign": "Interior Design",
+        "serviceRemodeling": "Remodeling",
+        "serviceBuilding": "Building",
+        "messagePlaceholder": "Type your message here.",
+        "sendMessageButton": "Send Message",
+        "Phone": "Phone",
+        "Email": "Email",
+        "Address": "Address"
+    },
+    "Header":{
+        "Home": "Home",
+        "Services": "Services",
+        "Contact": "Contact Us"
+    }
+}

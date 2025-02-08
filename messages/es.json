@@ -1,0 +1,30 @@
+{
+    "Home": {
+        "span": "Estudio de Arquitectura y Diseño",
+        "h1": "Somos",
+        "p": "Un equipo de arquitectos y diseñadores que realizan trabajos extraordinarios"
+    },
+    "Contact": {
+        "formTitle": "Trabajemos juntos",
+        "formDescription": "Llena el formulario a continuación y nos pondremos en contacto contigo lo antes posible.",
+        "firstNamePlaceholder": "Nombre",
+        "lastNamePlaceholder": "Apellido",
+        "emailPlaceholder": "Correo electrónico",
+        "phonePlaceholder": "Número de teléfono",
+        "selectServicePlaceholder": "Selecciona un servicio",
+        "selectService": "Selecciona un servicio",
+        "serviceInteriorDesign": "Diseño de interiores",
+        "serviceRemodeling": "Remodelación",
+        "serviceBuilding": "Construcción",
+        "messagePlaceholder": "Escribe tu mensaje aquí.",
+        "sendMessageButton": "Enviar mensaje",
+        "Phone": "Teléfono",
+        "Email": "Correo electrónico",
+        "Address": "Dirección"
+    },
+    "Header":{
+        "Home": "Inicio",
+        "Services": "Servicios",
+        "Contact": "Contáctanos"
+    }
+}
