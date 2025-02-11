@@ -9,8 +9,28 @@ const Nav = () => {
   const pathname = usePathname(); // Ruta actual
   const t = useTranslations('Header'); // Traducciones de la sección de navegación
 
+
   // Extraemos el idioma actual de la URL (esto se hace dividiendo la URL y obteniendo el primer segmento)
   const locale = pathname.split('/')[1] || 'en';  // 'en' es el idioma por defecto
+
+const Nav = () => {
+    const pathname = usePathname();
+    return (
+        <nav className='flex gap-8'>
+            {links.map((link, index) => {
+                return (
+                    <Link href={link.path} key={index}
+                        className={`${link.path === pathname && "text-accent border-b-2 border-accent"} 
+                        capitalize font-medium hover:text-accent transition-all`}
+                    >
+                        {link.name}
+                    </Link>
+                );
+            })}
+        </nav>
+    );
+}
+
 
   const links = [
     { name: "Home", path: `/${locale}` },
