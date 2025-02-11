@@ -2,7 +2,7 @@ import Social from "@/components/Social";
 import Photo from "@/components/Photo";
 import LandingCarousel from "@/components/LandingCarousel";
 import { useTranslations } from "next-intl";
-
+import config from "@/config";
 
 const Home = () => {
 
@@ -17,7 +17,7 @@ const Home = () => {
               {translation("h1")}<br />
             </h1>
             <div className="mb-6">
-              <Photo />
+              <Photo src={config.logoSrc} alt={config.logoAlt} />
             </div>
             <p className="max-w-[500px] mb-9">
               {translation("p")}

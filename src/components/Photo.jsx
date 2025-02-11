@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-const Photo = () => {
+const Photo = ({ src, alt }) => {
   return (
     <div className="w-full h-full relative">
       <motion.div
@@ -22,11 +22,11 @@ const Photo = () => {
           className="w-[200px] h-[200px] xl:w-[300px] xl:h-[300px] mx-auto"
         >
           <Image
-            src="/assets/logo.png"
+            src={src}
             priority
             quality={100}
             fill
-            alt="Logo"
+            alt={alt}
             className="object-contain"
           />
         </motion.div>
