@@ -18,6 +18,37 @@ const MobileNav = () => {
   // Extraemos el idioma de la URL
   const locale = pathname.split('/')[1] || 'en'; // 'en' es el idioma por defecto
 
+const MobileNav = () => {
+    const pathname = usePathname();
+    return (
+        <Sheet>
+            <SheetTrigger className="flex justify-center items-center">
+                <CiMenuFries className="text-[32px] text-primary" />
+            </SheetTrigger>
+            <SheetContent className="flex flex-col">
+                <div className="mt-32 mb-40 text-center text-2xl">
+                    <Link href="/">
+                        <h1 className="text-4xl font-semibold text-accent">
+                            A+AS <span>Partners</span>
+                        </h1>
+                    </Link>
+                </div>
+                <nav className="flex flex-col justify-center items-center gap-8 text-accent">
+                    {links.map((link, index) => {
+                        return (
+                            <Link href={link.path} key={index} className={`
+                            ${link.path === pathname && "text-white border-b-2 border-accent"}
+                            text-xl capitalize hover:text-white transition-all`}>
+                                {link.name}
+                            </Link>
+                        )
+                    })}
+                </nav>
+            </SheetContent>
+        </Sheet>
+    )
+}
+
   // Lista de enlaces con idioma dinámico
   const links = [
     { name: "Home", path: `/${locale}` },
