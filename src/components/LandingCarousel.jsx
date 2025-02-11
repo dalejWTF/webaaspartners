@@ -1,9 +1,8 @@
 "use client";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
-import Autoplay from "embla-carousel-autoplay"
+import Autoplay from "embla-carousel-autoplay";
 import { motion } from "framer-motion";
-
 import {
   Carousel,
   CarouselContent,
@@ -35,11 +34,13 @@ const images = [
 
 const LandingCarousel = () => {
   return (
-    <motion.section initial={{ opacity: 0 }}
+    <motion.section
+      initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
-        transition: { delay: 1, duration: 0.4, ease: "easeIn" }
-      }}>
+        transition: { delay: 1, duration: 0.4, ease: "easeIn" },
+      }}
+    >
       <Carousel
         plugins={[
           Autoplay({
@@ -47,22 +48,25 @@ const LandingCarousel = () => {
             stopOnInteraction: false,
           }),
         ]}
-        opts={{ loop: true }} className="w-full max-w max-h mx-auto">
-        <CarouselContent>
+        opts={{ loop: true }}
+        className="lx:w-[1200px] xl:h-[700px] w-[500px] xl:h-[500px]  mx-auto" // Tamaño fijo del carrusel
+      >
+        <CarouselContent className="xl:w-[1200px] xl:h-[700px] w-[500px] h-[500px] mx-auto">
           {images.map((image, index) => (
-            <CarouselItem key={index} className="basis-sm xl:basis-lg">
-              <div className="p-1">
-                <Card>
+            <CarouselItem key={index} className="w-full h-full">
+              <div className="p-1 w-full h-full">
+                <Card className="w-full h-full overflow-hidden"> {/* Evita que la imagen se desborde */}
                   <CardContent className="flex justify-center items-center w-full h-full p-0">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      priority
-                      width={500}      // Establece el ancho fijo
-                      height={500}     // Establece la altura fija
-                      quality={100}
-                      className="object-cover"
-                    />
+                    <div className="w-full h-full relative">
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        priority
+                        fill // Usa "fill" para que la imagen ocupe todo el espacio del contenedor
+                        quality={100}
+                        className="object-cover" // Ajusta la imagen sin estirarla
+                      />
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -71,7 +75,6 @@ const LandingCarousel = () => {
         </CarouselContent>
       </Carousel>
     </motion.section>
-
   );
 };
 
