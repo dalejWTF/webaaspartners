@@ -49,9 +49,9 @@ const LandingCarousel = () => {
           }),
         ]}
         opts={{ loop: true }}
-        className="lx:w-[1200px] xl:h-[700px] w-[500px] xl:h-[500px]  mx-auto" // Tamaño fijo del carrusel
+        className="xl:w-[1200px] xl:h-[700px] max-w-full h-[300px]  mx-auto" // Tamaño fijo del carrusel
       >
-        <CarouselContent className="xl:w-[1200px] xl:h-[700px] w-[500px] h-[500px] mx-auto">
+        <CarouselContent className="xl:w-[1200px] xl:h-[700px] w-[500px] h-[300px] mx-auto">
           {images.map((image, index) => (
             <CarouselItem key={index} className="w-full h-full">
               <div className="p-1 w-full h-full">
