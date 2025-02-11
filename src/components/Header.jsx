@@ -5,7 +5,7 @@ import Nav from './Nav'
 import MobileNav from './MobileNav'
 
 
-const Header = () =>{
+const Header = () => {
     return <header className="py-8 xl:py-12">
         <div className="container mx-auto flex justify-between items-center">
             {/* logo */}
@@ -17,7 +17,7 @@ const Header = () =>{
 
             {/* desktop nav & contact*/}
             <div className="hidden xl:flex items-center gap-8">
-                <Nav/>
+                <Nav />
                 <Link href="/contact">
                     <Button variant='outline'> Contact Us</Button>
                 </Link>
@@ -25,11 +25,11 @@ const Header = () =>{
 
             {/* desktop nav & contact*/}
             <div className="xl:hidden">
-                <MobileNav/>
+                <MobileNav />
             </div>
         </div>
     </header>
-    
+
 }
 
 
