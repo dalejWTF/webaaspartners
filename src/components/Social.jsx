@@ -17,11 +17,11 @@ const socials = [
     },
 ]
 
-const Social = ({containerStyles, iconStyles}) => {
-    return(
+const Social = ({ containerStyles, iconStyles }) => {
+    return (
         <div className={containerStyles}>
             {socials.map((item, index) => {
-                return(
+                return (
                     <Link key={index} href={item.path} className={iconStyles}>
                         {item.icon}
                     </Link>
