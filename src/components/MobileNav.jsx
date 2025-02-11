@@ -7,6 +7,7 @@ import Link from "next/link";
 import { CiMenuFries } from "react-icons/ci";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslations } from "next-intl"; // Importa el hook para las traducciones
+import config from "@/config";
 
 const MobileNav = () => {
   const pathname = usePathname();
@@ -45,8 +46,8 @@ const MobileNav = () => {
       <SheetContent className="flex flex-col">
         <div className="mt-32 mb-40 text-center text-2xl">
           <Link href={`/${locale}`}>
-            <h1 className="text-4xl font-semibold text-accent">
-              A+AS <span>Partners</span>
+            <h1 className="text-4xl font-semibold text-white">
+              {config.siteTitle}<br/><span className="text-4xl font-semibold text-accent">{config.siteTitleSpan}</span>
             </h1>
           </Link>
         </div>

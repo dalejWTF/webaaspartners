@@ -7,6 +7,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
+import config from "@/config";
 
 const interFont = Inter({
   variable: "--font-interFont",
@@ -15,8 +16,8 @@ const interFont = Inter({
 });
 
 export const metadata = {
-  title: "A+AS Partners",
-  description: "Building your dreams",
+  title: config.metaTitle,
+  description: config.description,
 };
 
 // Aquí se asegura de que `params` se resuelva correctamente
