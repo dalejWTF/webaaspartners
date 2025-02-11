@@ -12,7 +12,6 @@ const Header = () => {
   const t = useTranslations('Header'); // Obtén las traducciones para esta página
   const pathname = usePathname();
 
-
   // Extraemos el idioma actual de la URL (esto se hace dividiendo la URL y obteniendo el primer segmento)
   const locale = pathname.split('/')[1] || 'en'; // 'en' es el idioma por defecto
 
@@ -44,30 +43,6 @@ const Header = () => {
           </Link>
           {/* Dropdown de idioma */}
           <LanguageSwitcher />
-
-const Header = () => {
-    return <header className="py-8 xl:py-12">
-        <div className="container mx-auto flex justify-between items-center">
-            {/* logo */}
-            <Link href="/">
-                <h1 className="text-4xl font-semibold">
-                    A+AS <span className="text-accent">Partners</span>
-                </h1>
-            </Link>
-
-            {/* desktop nav & contact*/}
-            <div className="hidden xl:flex items-center gap-8">
-                <Nav />
-                <Link href="/contact">
-                    <Button variant='outline'> Contact Us</Button>
-                </Link>
-            </div>
-
-            {/* desktop nav & contact*/}
-            <div className="xl:hidden">
-                <MobileNav />
-            </div>
-
         </div>
 
         {/* mobile nav & contact */}
@@ -78,6 +53,5 @@ const Header = () => {
     </header>
   );
 };
-
 
 export default Header;
