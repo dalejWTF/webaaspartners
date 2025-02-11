@@ -1,0 +1,20 @@
+
+{
+    "Build1": [
+      "/projects/Build1/1.jpg",
+      "/projects/Build1/2.jpg",
+      "/projects/Build1/3.jpg"
+    ],
+    "Build2": [
+      "/projects/Build2/image1.jpg",
+      "/projects/Build2/image2.jpg"
+    ],
+    "Design1": [
+      "/projects/Design1/image1.jpg",
+      "/projects/Design1/image2.jpg"
+    ],
+    "Design2": [
+      "/projects/Design2/image1.jpg",
+      "/projects/Design2/image2.jpg"
+    ]
+}
