@@ -21,18 +21,18 @@ import { useTranslations } from "next-intl"; // Importa el hook
 const info = [
     {
         icon: <FaPhoneAlt />,
-        title: "Phone",
-        text: "+1 234 567 890"
+        title: "Phone Argentina",
+        text: "+54 9 11 6053 4334"
+    },
+    {
+        icon: <FaPhoneAlt />,
+        title: "Phone EC",
+        text: "+593 99 612 7261"
     },
     {
         icon: <FaEnvelope />,
         title: "Email",
-        text: "info@aaspartners.com"
-    },
-    {
-        icon: <FaMapMarkedAlt />,
-        title: "Address",
-        text: "1234 St Name, SomeCity, SomeCountry"
+        text: "hola@aaspartners.com"
     }
 ]
 
@@ -85,7 +85,7 @@ const Contact = () => {
                             {info.map((item, index) => {
                                 return (
                                     <li key={index} className="flex items-center gap-6">
-                                        <div className="w-[52px] h-[52px] xl:w-[72px] xl:h-[72px] bg-primary text-white rounded-md flex items-center justify-center">
+                                        <div className="w-[40px] h-[40px] xl:w-[60px] xl:h-[60px] bg-primary/80 text-white rounded-md flex items-center justify-center">
                                             <div className="text-[20px]">
                                                 {item.icon}
                                             </div>

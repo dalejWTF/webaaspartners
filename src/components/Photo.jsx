@@ -19,7 +19,7 @@ const Photo = ({ src, alt }) => {
             opacity: 1,
             transition: { delay: 1, duration: 0.4, ease: "easeInOut" }
           }}
-          className="w-[200px] h-[200px] xl:w-[300px] xl:h-[300px] mx-auto"
+          className="w-[200px] h-[200px] xl:w-[150px] xl:h-[150px] mx-auto"
         >
           <Image
             src={src}

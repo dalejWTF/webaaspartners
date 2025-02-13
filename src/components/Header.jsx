@@ -32,13 +32,14 @@ const Header = () => {
           <h1 className="text-4xl font-semibold">
             {config.siteTitle} <span className="text-accent">{config.siteTitleSpan}</span>
           </h1>
+          <span className='text-md text-accent'>Estudio de Arquitectura y Diseño</span>
         </Link>
 
         {/* desktop nav & contact */}
         <div className="hidden xl:flex items-center gap-8 text-accent">
           <Nav /> {/* Ya no pasamos el locale como prop */}
           <Link href={`/${locale}/contact`}>
-            <Button variant="outline" className="text-primary">
+            <Button variant="outline" className="text-primary/60">
               {t("Contact")}
             </Button>
           </Link>

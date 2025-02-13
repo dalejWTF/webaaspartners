@@ -7,14 +7,6 @@ const socials = [
         icon: <FaInstagram />,
         path: "https://www.instagram.com/arquitectos.aas/?igsh=MW40eDZxNXRuOHMxbQ%3D%3D"
     },
-    {
-        icon: <FaWhatsapp />,
-        path: "https://wa.me/+593983495374"
-    },
-    {
-        icon: <FaTiktok />,
-        path: "https://www.tiktok.com/@carlosulloamarquez?_t=ZM-8tb5cgCQiqE&_r=1"
-    },
 ]
 
 const Social = ({ containerStyles, iconStyles }) => {

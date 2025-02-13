@@ -11,6 +11,10 @@ import {
 
 const images = [
   {
+    src: "/assets/logo_old.png",
+    alt: "Image Logo",
+  },
+  {
     src: "/assets/images/1.jpg",
     alt: "Image 1",
   },
@@ -49,14 +53,14 @@ const LandingCarousel = () => {
           }),
         ]}
         opts={{ loop: true }}
-        className="xl:w-[1200px] xl:h-[700px] max-w-full h-[300px]  mx-auto" // Tamaño fijo del carrusel
+        className="xl:w-[1200px] xl:h-[700px] max-w-full h-[300px] mx-auto" // Tamaño fijo del carrusel
       >
         <CarouselContent className="xl:w-[1200px] xl:h-[700px] w-[500px] h-[300px] mx-auto">
           {images.map((image, index) => (
-            <CarouselItem key={index} className="w-full h-full">
-              <div className="p-1 w-full h-full">
-                <Card className="w-full h-full overflow-hidden"> {/* Evita que la imagen se desborde */}
-                  <CardContent className="flex justify-center items-center w-full h-full p-0">
+            <CarouselItem key={index} className="w-full h-full p-0"> {/* Quita el padding */}
+              <div className="w-full h-full">
+                <Card className="w-full h-full border-0 shadow-none"> {/* Quita el borde y la sombra */}
+                  <CardContent className="flex justify-center items-center w-full h-full p-0"> {/* Quita el padding */}
                     <div className="w-full h-full relative">
                       <Image
                         src={image.src}
