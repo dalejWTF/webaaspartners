@@ -18,13 +18,13 @@
         "serviceBuilding": "Building",
         "messagePlaceholder": "Type your message here.",
         "sendMessageButton": "Send Message",
-        "Phone": "Phone",
         "Email": "Email",
         "Address": "Address"
     },
     "Header":{
         "Home": "Home",
         "Services": "Services",
-        "Contact": "Contact Us"
+        "Contact": "Contact Us",
+        "siteSubtitle": "Architecture & Design Studio"
     }
 }
