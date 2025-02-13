@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { FaInstagram, FaWhatsapp, FaTiktok } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
 
 const socials = [
     {
