@@ -14,7 +14,7 @@ const Nav = () => {
 
   const links = [
     { name: "Home", path: `/${locale}` },
-    { name: "Services", path: `/${locale}/services` }
+    //{ name: "Services", path: `/${locale}/services` }
   ];
 
   return (
