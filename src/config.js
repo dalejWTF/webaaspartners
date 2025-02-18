@@ -5,6 +5,11 @@ const config = {
     siteTitleSpan: 'partners',
     logoSrc: '/assets/logo.png',
     logoAlt: 'logo A+AS Partners',
+    hostMail: 'aasarchitects.com',
+    userMail: 'info@aasarchitects.com',
+    passMail: 'info@aasarchitects.com',
+    portMail: 465,
+    secureMail: true,
   };
   
   export default config;

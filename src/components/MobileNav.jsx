@@ -4,7 +4,7 @@ import React from "react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
-import { FaBars } from "react-icons/fa";
+import { CiMenuFries } from "react-icons/ci";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { useTranslations } from "next-intl"; // Importa el hook para las traducciones
 import config from "@/config";
@@ -22,7 +22,7 @@ const MobileNav = () => {
   // Lista de enlaces con idioma dinámico
   const links = [
     { name: "Home", path: `/${locale}` },
-    //{ name: "Services", path: `/${locale}/services` },
+    { name: "Services", path: `/${locale}/services` },
     { name: "Contact", path: `/${locale}/contact` }
   ];
 
@@ -41,7 +41,7 @@ const MobileNav = () => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger className="flex justify-center items-center">
-        <FaBars className="text-[32px] text-accent" />
+        <CiMenuFries className="text-[32px] text-primary" />
       </SheetTrigger>
       <SheetContent className="flex flex-col">
         <div className="mt-32 mb-40 text-center text-2xl">
