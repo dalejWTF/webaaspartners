@@ -18,13 +18,13 @@
         "serviceBuilding": "Construcción",
         "messagePlaceholder": "Escribe tu mensaje aquí.",
         "sendMessageButton": "Enviar mensaje",
-        "Phone": "Teléfono",
         "Email": "Correo electrónico",
         "Address": "Dirección"
     },
     "Header":{
         "Home": "Inicio",
         "Services": "Servicios",
-        "Contact": "Contáctanos"
+        "Contact": "Contáctanos",
+        "siteSubtitle": "Estudio de Arquitectura y Diseño"
     }
 }

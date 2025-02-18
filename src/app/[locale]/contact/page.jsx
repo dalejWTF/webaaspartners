@@ -20,12 +20,12 @@ import { useTranslations } from "next-intl";
 const info = [
     {
         icon: <FaPhoneAlt />,
-        title: "Phone Argentina",
-        text: "+54 9 11 6053 4334"
+        title: "Argentina",
+        text: "+54 9 1160 53 4334"
     },
     {
         icon: <FaPhoneAlt />,
-        title: "Phone EC",
+        title: "Ecuador",
         text: "+593 99 612 7261"
     },
     {
@@ -123,7 +123,7 @@ const Contact = () => {
                                             </div>
                                         </div>
                                         <div className="flex-1">
-                                            <p>{t(item.title)}</p>
+                                            <p>{item.title}</p> 
                                             <h3 className="text-xl">{item.text}</h3>
                                         </div>
                                     </li>
