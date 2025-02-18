@@ -25,14 +25,14 @@ const Header = () => {
   }
 
   return (
-    <header className="py-8 xl:py-12">
-      <div className="container mx-auto flex justify-between items-center">
+    <header className="py-8 xl:pt-8 xl:pb-4">
+      <div className="container mx-auto flex justify-between">
         {/* logo */}
         <Link href={`/${locale}`}>
           <h1 className="text-4xl font-semibold">
             {config.siteTitle} <span className="text-accent">{config.siteTitleSpan}</span>
           </h1>
-          <span className='text-md text-accent'>Estudio de Arquitectura y Diseño</span>
+          <span className='text-md text-accent'>{t("siteSubtitle")}</span>
         </Link>
 
         {/* desktop nav & contact */}
