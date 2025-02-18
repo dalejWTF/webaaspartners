@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { Button } from './ui/button';
 import Nav from './Nav';
 import MobileNav from './MobileNav';
-import config from '@/config';
 import { usePathname } from 'next/navigation';
 import LanguageSwitcher from './LanguageSwitcher';
 import { useTranslations } from "next-intl"; // Importa el hook
@@ -30,7 +29,7 @@ const Header = () => {
         {/* logo */}
         <Link href={`/${locale}`}>
           <h1 className="text-4xl font-semibold">
-            {config.siteTitle} <span className="text-accent">{config.siteTitleSpan}</span>
+            {process.env.NEXT_PUBLIC_SITE_TITLE} <span className="text-accent">{process.env.NEXT_PUBLIC_SITE_TITLE_SPAN}</span>
           </h1>
           <span className='text-md text-accent'>{t("siteSubtitle")}</span>
         </Link>

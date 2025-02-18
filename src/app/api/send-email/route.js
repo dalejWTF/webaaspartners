@@ -1,25 +1,24 @@
 // app/api/send-email/route.js
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import config from '@/config';
 export async function POST(request) {
     const { firstname, lastname, email, phone, service, message } = await request.json();
 
     // Configurar el transporter de nodemailer
     const transporter = nodemailer.createTransport({
-        host: config.hostMail, // Cambia esto por el host de tu servidor de correo
-        port: config.portMail, // Puerto para SMTP seguro
-        secure: config.secureMail, // Usar SSL
+        host: process.env.MAIL_HOST, // Cambia esto por el host de tu servidor de correo
+        port: process.env.MAIL_PORT, // Puerto para SMTP seguro
+        secure: process.env.MAIL_SECURE, // Usar SSL
         auth: {
-            user: config.userMail, // Cambia esto por tu correo
-            pass: config.passMail, // Cambia esto por tu contraseña
+            user: process.env.MAIL_USER, // Cambia esto por tu correo
+            pass: process.env.MAIL_PASS, // Cambia esto por tu contraseña
         },
     });
 
     // Configurar el contenido del correo
     const mailOptions = {
-        from: config.userMail, // Correo del remitente
-        to: config.toMail,
+        from: process.env.MAIL_USER, // Correo del remitente
+        to: process.env.MAIL_TO,
         subject: 'Nuevo mensaje de contacto', // Asunto del correo
         text: `
             Nombre: ${firstname} ${lastname}
