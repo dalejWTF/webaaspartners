@@ -6,12 +6,12 @@ const config = {
     siteSubtitle: "Architecture & Design Studio",
     logoSrc: '/assets/logo.png',
     logoAlt: 'logo A+AS Partners',
-    hostMail: 'aasarchitects.com',
+    hostMail: 'p3plzcpnl508692.prod.phx3.secureserver.net',
     userMail: 'info@aasarchitects.com',
     passMail: 'VkmlMKDRnTYk', // hola -> teIskeHo1ev5
     portMail: 465,
     secureMail: true,
-    toMail:['c.ulloa@asarchitects.com','daulloa@asarchitects.com']
+    toMail:['c.ulloa@aasarchitects.com','daulloa@aasarchitects.com']
   };
   
   export default config;
