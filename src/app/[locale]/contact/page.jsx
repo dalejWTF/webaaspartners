@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -16,6 +15,7 @@ import {
 import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { SubmitButton } from "@/components/SubmitButton";
 
 const info = [
     {
@@ -45,14 +45,30 @@ const Contact = () => {
         service: "",
         message: ""
     });
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
+    const handlePhoneChange = (e) => {
+        const { value } = e.target;
+        // Validar que solo se ingresen números y el símbolo "+" al inicio
+        const cleanedValue = value.replace(/[^0-9+]/g, ''); // Eliminar caracteres no permitidos
+        if (cleanedValue.startsWith('+') || !cleanedValue.includes('+')) {
+            setFormData({ ...formData, phone: cleanedValue });
+        }
+    };
+
+    const handleServiceChange = (value) => {
+        setFormData({ ...formData, service: value }); // Almacena el valor crudo
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setIsLoading(true);
 
         try {
             const response = await fetch('/api/send-email', {
@@ -64,13 +80,21 @@ const Contact = () => {
             });
 
             if (response.ok) {
-                alert(t('emailSentSuccess'));
+                setIsSuccess(true);
+                setTimeout(() => {
+                    setIsSuccess(false);
+                    setIsLoading(false);
+                }, 3000);
             } else {
                 alert(t('emailSentError'));
             }
         } catch (error) {
             console.error('Error:', error);
             alert(t('emailSentError'));
+        } finally {
+            if (!isSuccess) {
+                setIsLoading(false);
+            }
         }
     };
 
@@ -89,12 +113,45 @@ const Contact = () => {
                             <h3 className="text-4xl text-accent">{t('formTitle')}</h3>
                             <p className="text-primary/90">{t('formDescription')}</p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <Input type="text" name="firstname" placeholder={t('firstNamePlaceholder')} onChange={handleChange} />
-                                <Input type="text" name="lastname" placeholder={t('lastNamePlaceholder')} onChange={handleChange} />
-                                <Input type="email" name="email" placeholder={t('emailPlaceholder')} onChange={handleChange} />
-                                <Input type="text" name="phone" placeholder={t('phonePlaceholder')} onChange={handleChange} />
+                                <Input
+                                    type="text"
+                                    name="firstname"
+                                    placeholder={t('firstNamePlaceholder')}
+                                    value={formData.firstname}
+                                    onChange={handleChange}
+                                    required // Campo obligatorio
+                                    title="Por favor, ingresa tu nombre."
+                                />
+                                <Input
+                                    type="text"
+                                    name="lastname"
+                                    placeholder={t('lastNamePlaceholder')}
+                                    value={formData.lastname}
+                                    onChange={handleChange}
+                                    required // Campo obligatorio
+                                    title="Por favor, ingresa tu apellido."
+                                />
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    placeholder={t('emailPlaceholder')}
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required // Campo obligatorio
+                                    title="Por favor, ingresa un correo electrónico válido."
+                                />
+                                <Input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder={t('phonePlaceholder')}
+                                    value={formData.phone}
+                                    onChange={handlePhoneChange}
+                                    pattern="\+?[0-9]*"
+                                    required // Campo obligatorio
+                                    title="Por favor, ingresa un número de teléfono válido (solo números y el símbolo + al inicio)."
+                                />
                             </div>
-                            <Select onValueChange={(value) => setFormData({ ...formData, service: value })}>
+                            <Select onValueChange={handleServiceChange} required> {/* Campo obligatorio */}
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder={t('selectServicePlaceholder')} />
                                 </SelectTrigger>
@@ -107,8 +164,23 @@ const Contact = () => {
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
-                            <Textarea className="h-[200px]" name="message" placeholder={t('messagePlaceholder')} onChange={handleChange} />
-                            <Button type="submit" className="max-w-40" variant='outline'>{t('sendMessageButton')}</Button>
+                            <Textarea
+                                className="h-[200px]"
+                                name="message"
+                                placeholder={t('messagePlaceholder')}
+                                value={formData.message}
+                                onChange={handleChange}
+                                required // Campo obligatorio
+                                title="Por favor, ingresa un mensaje."
+                            />
+                            {/* Usar el nuevo componente SubmitButton */}
+                            <SubmitButton
+                                isLoading={isLoading}
+                                isSuccess={isSuccess}
+                                sendMessageButton={t('sendMessageButton')}
+                                sendingMessageButton={t('sendingMessageButton')}
+                                emailSentSuccess={t('emailSentSuccess')}
+                            />
                         </form>
                     </div>
                     {/* Información de contacto */}

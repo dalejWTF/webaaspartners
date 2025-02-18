@@ -20,8 +20,11 @@
         "sendMessageButton": "Enviar mensaje",
         "Email": "Correo electrónico",
         "Address": "Dirección",
-        "emailSentSuccess": "¡Correo electrónico enviado con éxito! Nos pondremos en contacto contigo lo antes posible.",
-        "emailSentError": "Hubo un error al enviar el correo electrónico. Por favor, inténtalo de nuevo."
+        "sendingMessageButton": "Espera un momento, estamos enviando tu mensaje...",
+        "emailSentSuccessTitle": "¡Hurra!",
+        "emailSentSuccess": "Nos pondremos en contacto contigo lo antes posible.",
+        "emailSentError": "¡Ups!",
+        "emailSentErrorDescription": "Hubo un problema al enviar tu mensaje. Inténtalo de nuevo."
     },
     "Header":{
         "Home": "Inicio",

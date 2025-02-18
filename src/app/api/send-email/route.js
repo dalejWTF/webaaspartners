@@ -1,6 +1,7 @@
 // app/api/send-email/route.js
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { getEmailTemplate } from './templates/emailTemplate';
 
 export async function POST(request) {
     try {
@@ -11,10 +12,20 @@ export async function POST(request) {
 
         const { firstname, lastname, email, phone, service, message } = body;
 
+        // Diccionario para traducir el valor crudo del servicio
+        const serviceTranslations = {
+            intdes: "Interior Design", // Traducción para "intdes"
+            remo: "Remodeling",       // Traducción para "remo"
+            build: "Building",        // Traducción para "build"
+        };
+
+        // Obtener la traducción del servicio
+        const translatedService = serviceTranslations[service] || "Unknown Service";
+
         const transporter = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
             port: process.env.MAIL_PORT,
-            secure: process.env.MAIL_SECURE,
+            secure: process.env.MAIL_SECURE === 'true', // Convertir a booleano
             auth: {
                 user: process.env.MAIL_USER,
                 pass: process.env.MAIL_PASS,
@@ -23,17 +34,20 @@ export async function POST(request) {
 
         console.log("Transporter creado correctamente");
 
+        const htmlContent = getEmailTemplate(firstname, lastname, email, phone, translatedService, message);
+
         const mailOptions = {
             from: process.env.MAIL_USER,
             to: process.env.MAIL_TO,
-            subject: "Nuevo mensaje de contacto",
+            subject: `Hey! Tienes un nuevo mensaje de ${firstname} ${lastname} para ${translatedService}`,
             text: `
                 Nombre: ${firstname} ${lastname}
                 Email: ${email}
                 Teléfono: ${phone}
-                Servicio: ${service}
+                Servicio: ${translatedService}
                 Mensaje: ${message}
             `,
+            html: htmlContent, // Agregar el contenido HTML
         };
 
         console.log("Enviando correo...");
