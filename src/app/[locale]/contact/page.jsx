@@ -1,9 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
 import {
     Select,
     SelectContent,
@@ -13,10 +13,9 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
-
 import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
-import { useTranslations } from "next-intl"; // Importa el hook
+import { useTranslations } from "next-intl";
 
 const info = [
     {
@@ -34,10 +33,47 @@ const info = [
         title: "Email",
         text: "hola@aaspartners.com"
     }
-]
+];
 
 const Contact = () => {
-    const t = useTranslations('Contact'); // Obtén las traducciones para esta página
+    const t = useTranslations('Contact');
+    const [formData, setFormData] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: ""
+    });
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            });
+
+            if (response.ok) {
+                alert(t('emailSentSuccess'));
+            } else {
+                alert(t('emailSentError'));
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert(t('emailSentError'));
+        }
+    };
+
     return (
         <motion.section initial={{ opacity: 0 }}
             animate={{
@@ -49,18 +85,16 @@ const Contact = () => {
                 <div className="flex flex-col xl:flex-row gap-[30px]">
                     {/* Formulario de contacto */}
                     <div className="xl:h-[54%] order-2 xl:order-none">
-                        <form className="flex flex-col gap-6 p-10 border border-accent rounded-xl">
-                            <h3 className="text-4xl text-accent">{t('formTitle')}</h3> {/* Título dinámico */}
-                            <p className="text-primary/90">{t('formDescription')}</p> {/* Descripción dinámica */}
-                            {/* Campos de entrada */}
+                        <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 border border-accent rounded-xl">
+                            <h3 className="text-4xl text-accent">{t('formTitle')}</h3>
+                            <p className="text-primary/90">{t('formDescription')}</p>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <Input type="firstname" placeholder={t('firstNamePlaceholder')} />
-                                <Input type="lastname" placeholder={t('lastNamePlaceholder')} />
-                                <Input type="email" placeholder={t('emailPlaceholder')} />
-                                <Input type="phone" placeholder={t('phonePlaceholder')} />
+                                <Input type="text" name="firstname" placeholder={t('firstNamePlaceholder')} onChange={handleChange} />
+                                <Input type="text" name="lastname" placeholder={t('lastNamePlaceholder')} onChange={handleChange} />
+                                <Input type="email" name="email" placeholder={t('emailPlaceholder')} onChange={handleChange} />
+                                <Input type="text" name="phone" placeholder={t('phonePlaceholder')} onChange={handleChange} />
                             </div>
-                            {/* Selección de servicio */}
-                            <Select>
+                            <Select onValueChange={(value) => setFormData({ ...formData, service: value })}>
                                 <SelectTrigger className="w-full">
                                     <SelectValue placeholder={t('selectServicePlaceholder')} />
                                 </SelectTrigger>
@@ -73,10 +107,8 @@ const Contact = () => {
                                     </SelectGroup>
                                 </SelectContent>
                             </Select>
-                            {/* Campo de texto */}
-                            <Textarea className="h-[200px]" placeholder={t('messagePlaceholder')} />
-                            {/* Botón de envío */}
-                            <Button className="max-w-40" variant='outline'>{t('sendMessageButton')}</Button>
+                            <Textarea className="h-[200px]" name="message" placeholder={t('messagePlaceholder')} onChange={handleChange} />
+                            <Button type="submit" className="max-w-40" variant='outline'>{t('sendMessageButton')}</Button>
                         </form>
                     </div>
                     {/* Información de contacto */}
@@ -91,7 +123,7 @@ const Contact = () => {
                                             </div>
                                         </div>
                                         <div className="flex-1">
-                                            <p>{t(item.title)}</p> {/* Título dinámico */}
+                                            <p>{t(item.title)}</p>
                                             <h3 className="text-xl">{item.text}</h3>
                                         </div>
                                     </li>
@@ -102,7 +134,7 @@ const Contact = () => {
                 </div>
             </div>
         </motion.section>
-    )
-}
+    );
+};
 
 export default Contact;
