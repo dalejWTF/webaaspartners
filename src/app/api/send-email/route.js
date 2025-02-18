@@ -19,7 +19,7 @@ export async function POST(request) {
     // Configurar el contenido del correo
     const mailOptions = {
         from: config.userMail, // Correo del remitente
-        to: 'info@tudominio.com', // Correo del destinatario
+        to: config.toMail,
         subject: 'Nuevo mensaje de contacto', // Asunto del correo
         text: `
             Nombre: ${firstname} ${lastname}

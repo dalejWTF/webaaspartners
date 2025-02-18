@@ -8,9 +8,10 @@ const config = {
     logoAlt: 'logo A+AS Partners',
     hostMail: 'aasarchitects.com',
     userMail: 'info@aasarchitects.com',
-    passMail: 'info@aasarchitects.com',
+    passMail: 'VkmlMKDRnTYk', // hola -> teIskeHo1ev5
     portMail: 465,
     secureMail: true,
+    toMail:['c.ulloa@asarchitects.com','daulloa@asarchitects.com']
   };
   
   export default config;
