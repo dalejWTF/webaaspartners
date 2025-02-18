@@ -19,7 +19,9 @@
         "messagePlaceholder": "Type your message here.",
         "sendMessageButton": "Send Message",
         "Email": "Email",
-        "Address": "Address"
+        "Address": "Address",
+        "emailSentSuccess": "Email sent successfully! We'll get back to you as soon as possible.",
+        "emailSentError": "There was an error sending the email. Please try again."
     },
     "Header":{
         "Home": "Home",

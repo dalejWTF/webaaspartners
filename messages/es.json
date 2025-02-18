@@ -19,7 +19,9 @@
         "messagePlaceholder": "Escribe tu mensaje aquí.",
         "sendMessageButton": "Enviar mensaje",
         "Email": "Correo electrónico",
-        "Address": "Dirección"
+        "Address": "Dirección",
+        "emailSentSuccess": "¡Correo electrónico enviado con éxito! Nos pondremos en contacto contigo lo antes posible.",
+        "emailSentError": "Hubo un error al enviar el correo electrónico. Por favor, inténtalo de nuevo."
     },
     "Header":{
         "Home": "Inicio",
