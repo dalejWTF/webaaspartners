@@ -1,10 +1,7 @@
 import Social from "@/components/Social";
 import LandingCarousel from "@/components/LandingCarousel";
-import { useTranslations } from "next-intl";
 
 const Home = () => {
-  const translation = useTranslations("Home");
-
   return (
     <section className="h-full">
       <div className="container mx-auto h-full">

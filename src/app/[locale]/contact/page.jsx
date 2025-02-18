@@ -13,7 +13,7 @@ import {
     SelectTrigger,
     SelectValue
 } from "@/components/ui/select";
-import { FaPhoneAlt, FaEnvelope, FaMapMarkedAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 
