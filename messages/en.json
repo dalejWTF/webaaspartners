@@ -20,8 +20,11 @@
         "sendMessageButton": "Send Message",
         "Email": "Email",
         "Address": "Address",
-        "emailSentSuccess": "Email sent successfully! We'll get back to you as soon as possible.",
-        "emailSentError": "There was an error sending the email. Please try again."
+        "sendingMessageButton": "Hold on, we're sending your message...",
+        "emailSentSuccessTitle": "Hooray!",
+        "emailSentSuccess": "We'll get back to you as soon as possible.",
+        "emailSentError": "Oops!",
+        "emailSentErrorDescription": "There was a problem sending your message. Please try again."
     },
     "Header":{
         "Home": "Home",
