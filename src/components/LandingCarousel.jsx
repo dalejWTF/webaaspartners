@@ -8,10 +8,11 @@ import {
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
+import { useEffect } from "react"; // Importa useEffect
 
 const images = [
   {
-    src: "/assets/logo_old.png",
+    src: "/assets/logo.png",
     alt: "Image Logo",
   },
   {
@@ -37,6 +38,21 @@ const images = [
 ];
 
 const LandingCarousel = () => {
+  // Agrega el useEffect para desactivar el clic derecho
+  useEffect(() => {
+    const handleContextMenu = (e) => {
+      if (e.target.tagName.toLowerCase() === "img") {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+    };
+  }, []);
+
   return (
     <motion.section
       initial={{ opacity: 0 }}
@@ -57,9 +73,9 @@ const LandingCarousel = () => {
       >
         <CarouselContent className="xl:w-[1200px] xl:h-[700px] w-[500px] h-[300px] mx-auto">
           {images.map((image, index) => (
-            <CarouselItem key={index} className="w-full h-full p-0"> {/* Quita el padding */}
+             <CarouselItem key={index} className="w-full h-full p-0"> {/* Quita el padding */}
               <div className="w-full h-full">
-                <Card className="w-full h-full border-0 shadow-none"> {/* Quita el borde y la sombra */}
+              <Card className="w-full h-full border-0 shadow-none"> {/* Quita el borde y la sombra */}
                   <CardContent className="flex justify-center items-center w-full h-full p-0"> {/* Quita el padding */}
                     <div className="w-full h-full relative">
                       <Image

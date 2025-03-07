@@ -21,7 +21,7 @@ const MobileNav = () => {
   // Lista de enlaces con idioma dinámico
   const links = [
     { name: "Home", path: `/${locale}` },
-    { name: "Services", path: `/${locale}/services` },
+    //{ name: "Services", path: `/${locale}/services` },
     { name: "Contact", path: `/${locale}/contact` }
   ];
 

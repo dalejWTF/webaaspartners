@@ -5,7 +5,7 @@ import { FaInstagram } from "react-icons/fa";
 const socials = [
     {
         icon: <FaInstagram />,
-        path: "https://www.instagram.com/arquitectos.aas/?igsh=MW40eDZxNXRuOHMxbQ%3D%3D"
+        path: "https://www.instagram.com/architects.aas/?igsh=MW40eDZxNXRuOHMxbQ%3D%3D"
     },
 ]
 
