@@ -65,9 +65,9 @@ const LandingCarousel = () => {
           }),
         ]}
         opts={{ loop: true }}
-        className="xxl:w-[1350px] xxl:h-[700px] xl:w-[1150px] xl:h-[420px] max-w-full h-[300px] mx-auto pl-4" // Tamaño fijo del carrusel
+        className="xxl:w-[1350px] xxl:h-[700px] xl:w-[1150px] xl:h-[490px] max-w-full h-[300px] mx-auto pl-4" // Tamaño fijo del carrusel
       >
-        <CarouselContent className="xxl:w-[1350px] xxl:h-[700px] xl:w-[1150px] xl:h-[420px] w-[500px] h-[300px] mx-auto">
+        <CarouselContent className="xxl:w-[1350px] xxl:h-[700px] xl:w-[1150px] xl:h-[490px] w-[500px] h-[300px] mx-auto">
           {images.map((image, index) => (
              <CarouselItem key={index} className="w-full h-full p-0"> {/* Quita el padding */}
               <div className="w-full h-full">
@@ -80,7 +80,8 @@ const LandingCarousel = () => {
                         priority
                         fill // Usa "fill" para que la imagen ocupe todo el espacio del contenedor
                         quality={100}
-                        className="object-cover xl:object-[center_bottom]"
+                        className="object-contain w-full h-full xxl:max-w-[1350px] xxl:max-h-[700px] xl:max-w-[1200px] xl:max-h-[490px] transition-all duration-300"
+
                       />
                     </div>
                   </CardContent>

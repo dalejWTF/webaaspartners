@@ -24,7 +24,7 @@ const Header = () => {
   }
 
   return (
-    <header className="py-8 xl:pt-8 xl:pb-4">
+    <header className="py-8 xxl:pt-8 xxl:pb-4 xl:pt-4 xl:pb-2">
       <div className="container mx-auto flex justify-between">
         {/* logo */}
         <Link href={`/${locale}`}>
