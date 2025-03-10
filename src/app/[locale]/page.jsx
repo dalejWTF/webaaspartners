@@ -6,7 +6,7 @@ const Home = () => {
     <section className="h-full">
       <div className="container mx-auto h-full">
         {/* Carousel */}
-        <div className="flex flex-col xl:flex-row items-center xl:pt-6 pb-6">
+        <div className="flex flex-col xl:flex-row items-center xxl:pt-6 xl:pb-4 xxl:pb-6 xxl:pt-4">
           <LandingCarousel />
         </div>
 
