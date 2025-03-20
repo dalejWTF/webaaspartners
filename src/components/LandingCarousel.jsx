@@ -31,6 +31,10 @@ const images = [
     src: "/assets/images/5.jpg",
     alt: "Image 5",
   },
+  {
+    src: "/assets/images/6.jpg",
+    alt: "Image 6",
+  },
 ];
 
 const LandingCarousel = () => {
