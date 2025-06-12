@@ -31,7 +31,7 @@ const info = [
     {
         icon: <FaEnvelope />,
         title: "Email",
-        text: "hola@aaspartners.com"
+        text: "hola@aasarchitects.com"
     }
 ];
 
