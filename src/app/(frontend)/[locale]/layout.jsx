@@ -34,14 +34,11 @@ export default async function RootLayout({ children, params }) {
   const messages = await getMessages(locale);
 
   return (
-    <html lang={locale}> 
-      <body className={interFont.variable}> 
-        <NextIntlClientProvider messages={messages}>
-          <Header />
-          <StairTransition />
-          <PageTransition>{children}</PageTransition>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+
+    <NextIntlClientProvider messages={messages}>
+      <Header />
+      <StairTransition />
+      <PageTransition>{children}</PageTransition>
+    </NextIntlClientProvider>
   );
 }
