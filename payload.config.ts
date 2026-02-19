@@ -3,21 +3,24 @@ import { postgresAdapter } from '@payloadcms/db-postgres'
 import { vercelBlobStorage } from '@payloadcms/storage-vercel-blob'
 import sharp from 'sharp'
 
-const Users = {
-    slug: 'users',
-    auth: true,
-    fields: [],
-}
+import { Users } from '@/app/api/[...slug]/Users'
+import { Media } from '@/app/api/[...slug]/Media'
+import { Landing } from '@/app/api/[...slug]/Landing' 
 
 export default buildConfig({
     secret: process.env.PAYLOAD_SECRET || '',
     admin: { user: 'users' },
 
     db: postgresAdapter({
-        pool: { connectionString: process.env.DATABASE_URL },
+        pool: { connectionString: process.env.DATABASE_URL,
+            ssl: {
+        rejectUnauthorized: false, // A veces necesario para certificados autofirmados en desarrollo
+        
+      }
+         },
     }),
 
-    collections: [Users],
+    collections: [Users, Media, Landing],
 
     plugins: [
         vercelBlobStorage({
