@@ -1,3 +1,5 @@
+//app/(frontend)/[locale]/page.jsx
+
 import Social from "@/components/Social";
 import LandingCarousel from "@/components/LandingCarousel";
 

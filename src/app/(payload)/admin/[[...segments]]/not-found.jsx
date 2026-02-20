@@ -6,5 +6,13 @@ export const generateMetadata = ({ params, searchParams }) =>
     generatePageMetadata({ config, params, searchParams })
 
 export default function NotFound({ params, searchParams }) {
-    return NotFoundPage({ config, params, searchParams, importMap })
+    // Render using JSX instead of invoking it directly as a function
+    return (
+        <NotFoundPage 
+            config={config} 
+            params={params} 
+            searchParams={searchParams} 
+            importMap={importMap} 
+        />
+    )
 }

@@ -1,3 +1,8 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+
+// Aquí le indicamos a Next.js dónde está tu archivo de configuración (nota la extensión .jsx)
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.jsx');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
     images: {
@@ -10,4 +15,5 @@ const nextConfig = {
     },
 };
 
-module.exports = nextConfig;
+// Envolvemos tu configuración con el plugin
+export default withNextIntl(nextConfig);
