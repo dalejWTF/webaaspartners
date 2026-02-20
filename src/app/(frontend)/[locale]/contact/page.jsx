@@ -26,26 +26,27 @@ const info = [
     { icon: <FaEnvelope />, title: "Email", text: "hola@aasarchitects.com" }
 ];
 
+const INITIAL_FORM = {
+    firstname: "",
+    lastname: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: ""
+};
+
 export default function Contact() {
     const t = useTranslations("Contact");
-    const locale = useLocale(); // ✅ "es" | "en"
+    const locale = useLocale();
 
     const [services, setServices] = useState([]);
     const [servicesLoading, setServicesLoading] = useState(true);
 
-    const [formData, setFormData] = useState({
-        firstname: "",
-        lastname: "",
-        email: "",
-        phone: "",
-        service: "",
-        message: ""
-    });
+    const [formData, setFormData] = useState(INITIAL_FORM);
 
     const [isLoading, setIsLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
-    // ✅ Trae servicios desde Payload según el locale
     useEffect(() => {
         let cancelled = false;
 
@@ -56,13 +57,15 @@ export default function Contact() {
                     `where[active][equals]=true` +
                     `&limit=200` +
                     `&locale=${encodeURIComponent(locale)}` +
-                    `&fallback-locale=es`;
+                    `&fallback-locale=none`;
 
                 const res = await fetch(`/api/services?${qs}`, { cache: "no-store" });
                 if (!res.ok) throw new Error("Failed to load services");
 
                 const data = await res.json();
-                const docs = data?.docs ?? [];
+                const docs = (data?.docs ?? []).filter(
+                    (s) => typeof s?.label === "string" && s.label.trim().length > 0
+                );
 
                 if (!cancelled) setServices(docs);
             } catch (e) {
@@ -79,7 +82,6 @@ export default function Contact() {
         };
     }, [locale]);
 
-    // ✅ Orden alfabético por label en el idioma ya resuelto
     const sortedServices = useMemo(() => {
         return [...services].sort((a, b) =>
             (a?.label ?? "").localeCompare(b?.label ?? "", locale)
@@ -110,24 +112,22 @@ export default function Contact() {
             const response = await fetch("/api/send-email", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                // ✅ envía locale para que el backend pueda resolver label o armar subject
                 body: JSON.stringify({ ...formData, locale })
             });
 
             if (response.ok) {
                 setIsSuccess(true);
-                setTimeout(() => {
-                    setIsSuccess(false);
-                    setIsLoading(false);
-                }, 3000);
+                setFormData(INITIAL_FORM);
+                setIsLoading(false);
+                setTimeout(() => setIsSuccess(false), 3000);
             } else {
+                setIsLoading(false);
                 alert(t("emailSentError"));
             }
         } catch (error) {
             console.error("Error:", error);
+            setIsLoading(false);
             alert(t("emailSentError"));
-        } finally {
-            if (!isSuccess) setIsLoading(false);
         }
     };
 
@@ -140,18 +140,53 @@ export default function Contact() {
             <div className="container mx-auto">
                 <div className="flex flex-col xl:flex-row gap-[30px]">
                     <div className="xl:h-[54%] order-2 xl:order-none">
-                        <form onSubmit={handleSubmit} className="contact-form flex flex-col gap-6 p-10 border border-accent rounded-xl">
+                        <form
+                            onSubmit={handleSubmit}
+                            className="contact-form flex flex-col gap-6 p-10 border border-accent rounded-xl"
+                        >
                             <h3 className="text-4xl text-accent">{t("formTitle")}</h3>
                             <p className="text-primary/90">{t("formDescription")}</p>
 
                             <div className="contact-grid grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <Input name="firstname" placeholder={t("firstNamePlaceholder")} value={formData.firstname} onChange={handleChange} required />
-                                <Input name="lastname" placeholder={t("lastNamePlaceholder")} value={formData.lastname} onChange={handleChange} required />
-                                <Input type="email" name="email" placeholder={t("emailPlaceholder")} value={formData.email} onChange={handleChange} required />
-                                <Input type="tel" name="phone" placeholder={t("phonePlaceholder")} value={formData.phone} onChange={handlePhoneChange} pattern="\+?[0-9]*" required />
+                                <Input
+                                    name="firstname"
+                                    placeholder={t("firstNamePlaceholder")}
+                                    value={formData.firstname}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <Input
+                                    name="lastname"
+                                    placeholder={t("lastNamePlaceholder")}
+                                    value={formData.lastname}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <Input
+                                    type="email"
+                                    name="email"
+                                    placeholder={t("emailPlaceholder")}
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    required
+                                />
+                                <Input
+                                    type="tel"
+                                    name="phone"
+                                    placeholder={t("phonePlaceholder")}
+                                    value={formData.phone}
+                                    onChange={handlePhoneChange}
+                                    pattern="\+?[0-9]*"
+                                    required
+                                />
                             </div>
 
-                            <Select onValueChange={handleServiceChange} required disabled={servicesLoading}>
+                            <Select
+                                value={formData.service}
+                                onValueChange={handleServiceChange}
+                                required
+                                disabled={servicesLoading}
+                            >
                                 <SelectTrigger className="w-full">
                                     <SelectValue
                                         placeholder={servicesLoading ? "..." : t("selectServicePlaceholder")}
@@ -171,7 +206,14 @@ export default function Contact() {
                                 </SelectContent>
                             </Select>
 
-                            <Textarea className="contact-textarea h-[200px]" name="message" placeholder={t("messagePlaceholder")} value={formData.message} onChange={handleChange} required />
+                            <Textarea
+                                className="contact-textarea h-[200px]"
+                                name="message"
+                                placeholder={t("messagePlaceholder")}
+                                value={formData.message}
+                                onChange={handleChange}
+                                required
+                            />
 
                             <SubmitButton
                                 isLoading={isLoading}
@@ -198,7 +240,6 @@ export default function Contact() {
                             ))}
                         </ul>
                     </div>
-
                 </div>
             </div>
         </motion.section>

@@ -1,38 +1,27 @@
-// app/api/send-email/route.js
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { getEmailTemplate } from "./templates/emailTemplate";
 
-function getOriginFromRequest(request) {
-    const proto = request.headers.get("x-forwarded-proto") || "http";
-    const host =
-        request.headers.get("x-forwarded-host") ||
-        request.headers.get("host") ||
-        "localhost:3000";
+// ✅ Payload local API (v3 / Next)
+// Ajusta el import según tu setup si tu payload está en otro path
+import { getPayload } from "payload";
+import config from "@/payload.config"; // o "../../payload.config" según tu alias
 
-    return `${proto}://${host}`;
-}
-
-async function fetchServiceLabel({ origin, slug, locale }) {
+async function getServiceLabelFromPayload({ slug, locale }) {
     if (!slug) return null;
 
-    const qs =
-        `where[slug][equals]=${encodeURIComponent(slug)}` +
-        `&limit=1` +
-        `&locale=${encodeURIComponent(locale || "es")}` +
-        `&fallback-locale=es`;
+    const payload = await getPayload({ config });
 
-    const res = await fetch(`${origin}/api/services?${qs}`, {
-        cache: "no-store",
-        headers: {
-            "content-type": "application/json",
-        },
+    const result = await payload.find({
+        collection: "services",
+        where: { slug: { equals: slug } },
+        limit: 1,
+        locale: locale || "es",
+        fallbackLocale: "es", // o "none" si prefieres
+        depth: 0
     });
 
-    if (!res.ok) return null;
-
-    const data = await res.json();
-    return data?.docs?.[0]?.label ?? null;
+    return result?.docs?.[0]?.label ?? null;
 }
 
 export async function POST(request) {
@@ -40,10 +29,8 @@ export async function POST(request) {
         const body = await request.json();
         const { firstname, lastname, email, phone, service, message, locale } = body;
 
-        const origin = getOriginFromRequest(request);
-
         const serviceLabel =
-            (await fetchServiceLabel({ origin, slug: service, locale })) ||
+            (await getServiceLabelFromPayload({ slug: service, locale })) ||
             "Unknown Service";
 
         const transporter = nodemailer.createTransport({
@@ -52,8 +39,8 @@ export async function POST(request) {
             secure: process.env.MAIL_SECURE === "true",
             auth: {
                 user: process.env.MAIL_USER,
-                pass: process.env.MAIL_PASS,
-            },
+                pass: process.env.MAIL_PASS
+            }
         });
 
         const htmlContent = getEmailTemplate(
@@ -70,22 +57,19 @@ export async function POST(request) {
             to: process.env.MAIL_TO,
             subject: `Nuevo mensaje de ${firstname} ${lastname} - ${serviceLabel}`,
             text: `Nombre: ${firstname} ${lastname}
-            Email: ${email}
-            Teléfono: ${phone}
-            Servicio: ${serviceLabel}
-            Mensaje: ${message}
-            `,
-            html: htmlContent,
+Email: ${email}
+Teléfono: ${phone}
+Servicio: ${serviceLabel}
+Mensaje: ${message}
+`,
+            html: htmlContent
         });
 
-        return NextResponse.json(
-            { message: "Correo enviado correctamente" },
-            { status: 200 }
-        );
+        return NextResponse.json({ message: "Correo enviado correctamente" }, { status: 200 });
     } catch (error) {
         console.error("Error en el servidor:", error);
         return NextResponse.json(
-            { message: "Error al enviar el correo", error: error.message },
+            { message: "Error al enviar el correo", error: error?.message },
             { status: 500 }
         );
     }
