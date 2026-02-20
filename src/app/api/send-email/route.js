@@ -5,7 +5,7 @@ import { getEmailTemplate } from "./templates/emailTemplate";
 // ✅ Payload local API (v3 / Next)
 // Ajusta el import según tu setup si tu payload está en otro path
 import { getPayload } from "payload";
-import config from "@/payload.config"; // o "../../payload.config" según tu alias
+import config from "@payload-config"; // o "../../payload.config" según tu alias
 
 async function getServiceLabelFromPayload({ slug, locale }) {
     if (!slug) return null;
