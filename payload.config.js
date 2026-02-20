@@ -6,10 +6,17 @@ import sharp from "sharp";
 import { Users } from "./src/app/api/[...slug]/Users.js";
 import { Media } from "./src/app/api/[...slug]/Media.js";
 import { Landing } from "./src/app/api/[...slug]/Landing.js";
+import { Services } from "./src/app/api/[...slug]/Services.js";
 
 export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || "",
   admin: { user: "users" },
+
+  localization: {
+    locales: ["es", "en"],
+    defaultLocale: "es",
+    fallback: true,
+  },
 
   db: postgresAdapter({
     pool: {
@@ -18,7 +25,7 @@ export default buildConfig({
     },
   }),
 
-  collections: [Users, Media, Landing],
+  collections: [Users, Media, Landing, Services],
 
   plugins: [
     vercelBlobStorage({
