@@ -1,0 +1,48 @@
+/* (payload)/admin/custom.scss */
+
+/* Puedes ajustar colores aquí */
+:root {
+    --brand: #111827;
+    /* color principal (dark) */
+    --brand-2: #6b7280;
+    /* secundario */
+}
+
+/* Tipografía general */
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Cards / paneles: bordes redondeados */
+[class*="card"],
+[class*="Card"],
+[class*="panel"] {
+    border-radius: 14px !important;
+}
+
+/* Inputs un poco más suaves */
+input,
+textarea,
+select {
+    border-radius: 12px !important;
+}
+
+/* Botones */
+button {
+    border-radius: 12px !important;
+}
+
+/* Sidebar (depende de la versión, esto suele agarrar algo) */
+nav {
+    background: var(--brand) !important;
+}
+
+/* Links del menú */
+nav a {
+    color: #e5e7eb !important;
+}
+
+/* Hover */
+nav a:hover {
+    opacity: 0.9;
+}
