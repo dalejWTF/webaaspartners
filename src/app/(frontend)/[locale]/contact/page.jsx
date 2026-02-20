@@ -20,7 +20,8 @@ import { FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const info = [
-    { icon: <FaPhoneAlt />, title: "Argentina", text: "+54 9 1160 53 4334" },
+    { icon: <FaPhoneAlt />, title: "Argentina", text: "+54 9 11 6053-4334" },
+    { icon: <FaPhoneAlt />, title: "Argentina", text: "+54 9 11 7110-4201" },
     { icon: <FaPhoneAlt />, title: "Ecuador", text: "+593 99 612 7261" },
     { icon: <FaEnvelope />, title: "Email", text: "hola@aasarchitects.com" }
 ];
@@ -134,16 +135,16 @@ export default function Contact() {
         <motion.section
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { delay: 1, duration: 0.4, ease: "easeIn" } }}
-            className="py-6"
+            className="py-4 xl:py-0"
         >
             <div className="container mx-auto">
                 <div className="flex flex-col xl:flex-row gap-[30px]">
                     <div className="xl:h-[54%] order-2 xl:order-none">
-                        <form onSubmit={handleSubmit} className="flex flex-col gap-6 p-10 border border-accent rounded-xl">
+                        <form onSubmit={handleSubmit} className="contact-form flex flex-col gap-6 p-10 border border-accent rounded-xl">
                             <h3 className="text-4xl text-accent">{t("formTitle")}</h3>
                             <p className="text-primary/90">{t("formDescription")}</p>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="contact-grid grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <Input name="firstname" placeholder={t("firstNamePlaceholder")} value={formData.firstname} onChange={handleChange} required />
                                 <Input name="lastname" placeholder={t("lastNamePlaceholder")} value={formData.lastname} onChange={handleChange} required />
                                 <Input type="email" name="email" placeholder={t("emailPlaceholder")} value={formData.email} onChange={handleChange} required />
@@ -170,7 +171,7 @@ export default function Contact() {
                                 </SelectContent>
                             </Select>
 
-                            <Textarea className="h-[200px]" name="message" placeholder={t("messagePlaceholder")} value={formData.message} onChange={handleChange} required />
+                            <Textarea className="contact-textarea h-[200px]" name="message" placeholder={t("messagePlaceholder")} value={formData.message} onChange={handleChange} required />
 
                             <SubmitButton
                                 isLoading={isLoading}
