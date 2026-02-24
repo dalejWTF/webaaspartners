@@ -1,3 +1,5 @@
+//app/(frontend)/[locale]/layout.jsx
+
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/Header";
@@ -34,14 +36,11 @@ export default async function RootLayout({ children, params }) {
   const messages = await getMessages(locale);
 
   return (
-    <html lang={locale}> 
-      <body className={interFont.variable}> 
-        <NextIntlClientProvider messages={messages}>
-          <Header />
-          <StairTransition />
-          <PageTransition>{children}</PageTransition>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+
+    <NextIntlClientProvider messages={messages}>
+      <Header />
+      <StairTransition />
+      <PageTransition>{children}</PageTransition>
+    </NextIntlClientProvider>
   );
 }

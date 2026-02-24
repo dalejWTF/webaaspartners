@@ -1,3 +1,5 @@
+//src/i18n/request.jsx
+
 import { getRequestConfig } from 'next-intl/server';
 import { routing } from './routing';
 

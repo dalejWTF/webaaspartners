@@ -1,63 +1,76 @@
-// app/api/send-email/route.js
-import { NextResponse } from 'next/server';
-import nodemailer from 'nodemailer';
-import { getEmailTemplate } from './templates/emailTemplate';
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import { getEmailTemplate } from "./templates/emailTemplate";
+
+// ✅ Payload local API (v3 / Next)
+// Ajusta el import según tu setup si tu payload está en otro path
+import { getPayload } from "payload";
+import config from "@payload-config"; // o "../../payload.config" según tu alias
+
+async function getServiceLabelFromPayload({ slug, locale }) {
+    if (!slug) return null;
+
+    const payload = await getPayload({ config });
+
+    const result = await payload.find({
+        collection: "services",
+        where: { slug: { equals: slug } },
+        limit: 1,
+        locale: locale || "es",
+        fallbackLocale: "es", // o "none" si prefieres
+        depth: 0
+    });
+
+    return result?.docs?.[0]?.label ?? null;
+}
 
 export async function POST(request) {
     try {
-        console.log("Recibiendo solicitud POST...");
-
         const body = await request.json();
-        console.log("Datos recibidos:", body);
+        const { firstname, lastname, email, phone, service, message, locale } = body;
 
-        const { firstname, lastname, email, phone, service, message } = body;
-
-        // Diccionario para traducir el valor crudo del servicio
-        const serviceTranslations = {
-            intdes: "Interior Design", // Traducción para "intdes"
-            remo: "Remodeling",       // Traducción para "remo"
-            build: "Building",        // Traducción para "build"
-        };
-
-        // Obtener la traducción del servicio
-        const translatedService = serviceTranslations[service] || "Unknown Service";
+        const serviceLabel =
+            (await getServiceLabelFromPayload({ slug: service, locale })) ||
+            "Unknown Service";
 
         const transporter = nodemailer.createTransport({
             host: process.env.MAIL_HOST,
-            port: process.env.MAIL_PORT,
-            secure: process.env.MAIL_SECURE === 'true', // Convertir a booleano
+            port: Number(process.env.MAIL_PORT),
+            secure: process.env.MAIL_SECURE === "true",
             auth: {
                 user: process.env.MAIL_USER,
-                pass: process.env.MAIL_PASS,
-            },
+                pass: process.env.MAIL_PASS
+            }
         });
 
-        console.log("Transporter creado correctamente");
+        const htmlContent = getEmailTemplate(
+            firstname,
+            lastname,
+            email,
+            phone,
+            serviceLabel,
+            message
+        );
 
-        const htmlContent = getEmailTemplate(firstname, lastname, email, phone, translatedService, message);
-
-        const mailOptions = {
+        await transporter.sendMail({
             from: process.env.MAIL_USER,
             to: process.env.MAIL_TO,
-            subject: `Hey! Tienes un nuevo mensaje de ${firstname} ${lastname} para ${translatedService}`,
-            text: `
-                Nombre: ${firstname} ${lastname}
-                Email: ${email}
-                Teléfono: ${phone}
-                Servicio: ${translatedService}
-                Mensaje: ${message}
-            `,
-            html: htmlContent, // Agregar el contenido HTML
-        };
-
-        console.log("Enviando correo...");
-        await transporter.sendMail(mailOptions);
-        console.log("Correo enviado correctamente");
+            subject: `Nuevo mensaje de ${firstname} ${lastname} - ${serviceLabel}`,
+            text: `Nombre: ${firstname} ${lastname}
+Email: ${email}
+Teléfono: ${phone}
+Servicio: ${serviceLabel}
+Mensaje: ${message}
+`,
+            html: htmlContent
+        });
 
         return NextResponse.json({ message: "Correo enviado correctamente" }, { status: 200 });
-
     } catch (error) {
         console.error("Error en el servidor:", error);
-        return NextResponse.json({ message: "Error al enviar el correo", error: error.message }, { status: 500 });
+        return NextResponse.json(
+            { message: "Error al enviar el correo", error: error?.message },
+            { status: 500 }
+        );
     }
 }

@@ -127,3 +127,9 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+.vercel
+
+# Env files
+.env
+.env.*
+!.env.example
