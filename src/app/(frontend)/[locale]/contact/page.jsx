@@ -227,17 +227,6 @@ export default function Contact() {
 
                     <div className="flex-1 flex items-center xl:justify-end order-1 xl:order-none mb-8 xl:mb-0">
                         <ul className="flex flex-col gap-10">
-                            {info.map((item, index) => (
-                                <li key={index} className="flex items-center gap-6">
-                                    <div className="w-[40px] h-[40px] xl:w-[60px] xl:h-[60px] bg-primary/80 text-white rounded-md flex items-center justify-center">
-                                        <div className="text-[20px]">{item.icon}</div>
-                                    </div>
-                                    <div className="flex-1">
-                                        <p>{item.title}</p>
-                                        <h3 className="text-xl">{item.text}</h3>
-                                    </div>
-                                </li>
-                            ))}
                         </ul>
                     </div>
                 </div>
